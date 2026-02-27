@@ -8,7 +8,7 @@ The application provides full task lifecycle management: creating, viewing, upda
 
 ## 🚀 Running the Application
 Backend
-- Java 17+ (or Java 8+)
+- Java 17+
 - Maven
 - cd backend
 - mvn clean install
