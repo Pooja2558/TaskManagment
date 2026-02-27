@@ -6,6 +6,24 @@ The application provides full task lifecycle management: creating, viewing, upda
 
 ---
 
+## 🚀 Running the Application
+Backend
+- Java 17+ (or Java 8+)
+- Maven
+- cd backend
+- mvn clean install
+- mvn spring-boot:run
+- http://localhost:8080.
+
+Frontend (AngularJS 1.x)
+- Node.js
+- npm
+- cd frontend
+- npm install
+- npm start
+- http://localhost:4200
+
+  
 ## 🧰 Technology Stack
 
 | Layer      | Technology                  |
