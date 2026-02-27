@@ -1,0 +1,333 @@
+<!--<!DOCTYPE html>-->
+<!--<html ng-app="app">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Task Manager</title>-->
+<!--    &lt;!&ndash; Angular library &ndash;&gt;-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>-->
+
+<!--    &lt;!&ndash; Module definition &ndash;&gt;-->
+<!--    <script src="app/app.js"></script>-->
+
+<!--    &lt;!&ndash; Services &ndash;&gt;-->
+<!--    <script src="app/tasks/taskService.js"></script>-->
+
+<!--    &lt;!&ndash; Controllers &ndash;&gt;-->
+<!--    <script src="app/tasks/taskController.js"></script>-->
+<!--    <style>-->
+<!--        /* General styles */-->
+<!--        body {-->
+<!--            font-family: Arial, sans-serif;-->
+<!--            background-color: #f9f9f9;-->
+<!--            margin: 0;-->
+<!--            padding: 20px;-->
+<!--        }-->
+
+<!--        h1, h2 {-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        /* Container */-->
+<!--        .container {-->
+<!--            max-width: 600px;-->
+<!--            margin: 0 auto;-->
+<!--            background-color: #fff;-->
+<!--            padding: 20px 30px;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 0 10px rgba(0,0,0,0.1);-->
+<!--        }-->
+
+<!--        /* Form styles */-->
+<!--        input[type="text"], select {-->
+<!--            padding: 8px 10px;-->
+<!--            margin: 5px 0;-->
+<!--            width: 100%;-->
+<!--            box-sizing: border-box;-->
+<!--            border: 1px solid #ccc;-->
+<!--            border-radius: 4px;-->
+<!--        }-->
+
+<!--        button {-->
+<!--            padding: 8px 16px;-->
+<!--            margin-top: 10px;-->
+<!--            background-color: #4CAF50;-->
+<!--            border: none;-->
+<!--            color: white;-->
+<!--            cursor: pointer;-->
+<!--            border-radius: 4px;-->
+<!--            transition: background-color 0.2s;-->
+<!--        }-->
+
+<!--        button:hover {-->
+<!--            background-color: #45a049;-->
+<!--        }-->
+
+<!--        /* Task list */-->
+<!--        ul {-->
+<!--            list-style-type: none;-->
+<!--            padding-left: 0;-->
+<!--        }-->
+
+<!--        li {-->
+<!--            padding: 10px;-->
+<!--            margin-bottom: 5px;-->
+<!--            background-color: #f1f1f1;-->
+<!--            border-radius: 4px;-->
+<!--        }-->
+
+<!--        li strong {-->
+<!--            color: #555;-->
+<!--        }-->
+
+<!--        li em {-->
+<!--            font-style: normal;-->
+<!--            font-weight: bold;-->
+<!--            color: #888;-->
+<!--            float: right;-->
+<!--        }-->
+
+<!--        hr {-->
+<!--            border: 0;-->
+<!--            border-top: 1px solid #eee;-->
+<!--            margin: 20px 0;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+
+<!--<body ng-controller="TaskController as vm">-->
+
+<!--<div class="container">-->
+<!--    <h1>Task Management</h1>-->
+
+<!--    &lt;!&ndash; Task Form &ndash;&gt;-->
+<!--    <h2>Add Task</h2>-->
+<!--    <form ng-submit="vm.addTask()">-->
+<!--        <input type="text" ng-model="vm.newTask.title" placeholder="Title" required />-->
+<!--        <input type="text" ng-model="vm.newTask.description" placeholder="Description" />-->
+<!--&lt;!&ndash;        <select ng-model="vm.newTask.status">&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="OPEN">OPEN</option>&ndash;&gt;-->
+<!--&lt;!&ndash;            <option value="DONE">DONE</option>&ndash;&gt;-->
+<!--&lt;!&ndash;        </select>&ndash;&gt;-->
+
+<!--        <select ng-model="vm.newTask.status" ng-options="s for s in ['OPEN','DONE']"></select>-->
+<!--        <button type="submit">Add Task</button>-->
+<!--    </form>-->
+
+<!--    <hr>-->
+
+<!--    &lt;!&ndash; Task List &ndash;&gt;-->
+<!--    <h2>Tasks</h2>-->
+<!--    <ul>-->
+<!--        <li ng-repeat="task in vm.tasks">-->
+<!--            <strong>{{task.title}}</strong> - {{task.description || 'No description'}}-->
+<!--            <em>{{task.status}}</em>-->
+<!--        </li>-->
+<!--    </ul>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+    <!-- Angular library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.29/angular-ui-router.min.js"></script>
+    <!-- Module definition -->
+    <script src="app/app.js"></script>
+
+    <!-- Services -->
+    <script src="app/tasks/taskService.js"></script>
+
+    <!-- Controllers -->
+    <script src="app/tasks/taskController.js"></script>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Form styles */
+        input[type="text"], select {
+            padding: 8px 10px;
+            margin: 5px 0;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 8px 16px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #eee;
+            margin: 20px 0;
+        }
+
+        /* Table styles */
+        .task-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .task-table th,
+        .task-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .task-table th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .task-table tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        .task-table button {
+            margin-right: 5px;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .task-table button:hover {
+            opacity: 0.8;
+        }
+
+        .task-table button.edit-btn {
+            background-color: #2196F3; /* Blue */
+            color: white;
+        }
+
+        .task-table button.delete-btn {
+            background-color: #f44336; /* Red */
+            color: white;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-box {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            max-width: 400px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        .modal-box h3 {
+            margin-top: 0;
+        }
+
+        .modal-box button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body ng-controller="TaskController as vm">
+
+<div class="container">
+    <h1>Task Management</h1>
+
+    <!-- Task Form -->
+    <h2>Add Task</h2>
+    <form ng-submit="vm.addTask()">
+        <input type="text" ng-model="vm.newTask.title" placeholder="Title" required />
+        <input type="text" ng-model="vm.newTask.description" placeholder="Description" />
+        <select ng-model="vm.newTask.status" ng-options="s for s in ['OPEN','DONE']"></select>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <hr>
+
+    <!-- Task List in Table -->
+    <h2>Tasks</h2>
+    <table class="task-table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="task in vm.tasks">
+            <td>{{task.id}}</td>
+            <td>{{task.title}}</td>
+            <td>{{task.description || 'No description'}}</td>
+            <td>{{task.status}}</td>
+            <td>
+                <button type="button" class="edit-btn" ng-click="vm.editTask(task)">Edit</button>
+                <button type="button" class="delete-btn" ng-click="vm.deleteTask(task)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-overlay" ng-if="vm.showErrorModal">
+    <div class="modal-box">
+        <h3>Error</h3>
+        <div ng-repeat="(field, message) in vm.errorMessages">
+            <p><strong>{{field}}:</strong> {{message}}</p>
+        </div>
+        <button ng-click="vm.closeErrorModal()">Close</button>
+    </div>
+</div>
+
+</body>
+</html>
