@@ -103,6 +103,6 @@ All errors return a **structured JSON response**:
     "error": "Validation Error",
     "path": "/tasks",
     "status": 400
-}```
+}
 
 
