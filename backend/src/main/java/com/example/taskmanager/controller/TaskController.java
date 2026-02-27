@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tasks")
-@CrossOrigin(origins = "http://localhost:63342")
+@CrossOrigin
 @RequiredArgsConstructor
 public class TaskController {
 
@@ -42,4 +42,5 @@ public class TaskController {
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
+
 }
