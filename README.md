@@ -96,11 +96,13 @@ All errors return a **structured JSON response**:
 
 ```json
 {
-  "timestamp": "2026-02-27T12:00:00Z",
-  "status": 404,
-  "error": "Not Found",
-  "message": "Task with ID 5 not found",
-  "path": "/tasks/5"
+    "message": {
+        "description": "Description is required"
+    },
+    "timestamp": "2026-02-27T10:40:31.525+00:00",
+    "error": "Validation Error",
+    "path": "/tasks",
+    "status": 400
 }```
 
 
